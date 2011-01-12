@@ -1,0 +1,77 @@
+= LZF/Ruby
+
+Copyright (c) 2008 SUGAWARA Genki <sgwr_dts@yahoo.co.jp>
+
+== Description
+
+Ruby bindings for LibLZF.
+
+LibLZF is a very fast compression library.
+
+== Source Code
+
+https://bitbucket.org/winebarrel/lzf-ruby
+
+== Install
+
+gem install lzfruby
+
+== Example
+
+    require 'lzfruby'
+    require 'open-uri'
+    require 'stringio'
+    
+    source = open('http://lzfruby.rubyforge.org/') {|f| f.read }
+    source = StringIO.new(source)
+    
+    puts "uncompress size: #{source.length}"
+    
+    # compress
+    comp_data = StringIO.new
+    LZF.compress(source, comp_data)
+    puts "compress size: #{comp_data.length}"
+    
+    # decompress
+    comp_data.seek(0)
+    decomp_data = StringIO.new
+    LZF.decompress(comp_data, decomp_data)
+    puts "decompress size: #{decomp_data.length}"
+    puts "decompress success?: #{source.string == decomp_data.string}"
+
+== License
+
+    Copyright (c) 2008 SUGAWARA Genki <sgwr_dts@yahoo.co.jp>
+    All rights reserved.
+    
+    Redistribution and use in source and binary forms, with or without modification,
+    are permitted provided that the following conditions are met:
+    
+        * Redistributions of source code must retain the above copyright notice, 
+          this list of conditions and the following disclaimer.
+        * Redistributions in binary form must reproduce the above copyright notice, 
+          this list of conditions and the following disclaimer in the documentation 
+          and/or other materials provided with the distribution.
+        * The names of its contributors may be used to endorse or promote products 
+           derived from this software without specific prior written permission.
+    
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
+    ANY EXPRESS OR IMPLIED WARRANTIES,
+    INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND 
+    FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+    OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+    OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
+    STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY 
+    OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH 
+    DAMAGE.
+
+=== LibLZF
+
+LZF/Ruby contains LibLZF.
+
+LibLZF is a very fast compression library.
+
+* http://www.goof.com/pcg/marc/liblzf.html
+* Copyright (c) 2000-2008 Marc Alexander Lehmann <schmorp@schmorp.de>
